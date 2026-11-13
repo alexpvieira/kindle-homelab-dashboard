@@ -1,6 +1,23 @@
+# Local config and state (hold the token, server URL and your own setup)
 server/config.toml
 server/state/
+server/.env
+.env
 kindle/serverdash/config
+kindle/serverdash/autostart
+
+# Kindle logs (loop.sh rotates log.txt to log.old)
 kindle/serverdash/log.txt
-.DS_Store
+kindle/serverdash/log.old
+
+# Build and slicer leftovers
 __pycache__/
+*.pyc
+result.json
+*.gcode
+
+# OS, editors, local agent settings
+.DS_Store
+.vscode/
+.idea/
+.claude/settings.local.json
