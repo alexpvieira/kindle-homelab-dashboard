@@ -1,0 +1,6 @@
+server/config.toml
+server/state/
+kindle/serverdash/config
+kindle/serverdash/log.txt
+.DS_Store
+__pycache__/

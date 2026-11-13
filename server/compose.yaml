@@ -1,0 +1,23 @@
+# Kindle homelab dashboard, server side. Copy config.example.toml to config.toml first.
+# The Kindle fetches a rendered PNG from :8100 and sends taps back (see app.py).
+# This container has the Docker socket (restart containers; reboot the host through a short-lived
+# privileged helper container), so keep the token secret and the port on your LAN only.
+# After editing app.py or config.toml: docker compose up -d --build
+services:
+  kindle-dash:
+    build: .
+    image: kindle-homelab-dashboard
+    container_name: kindle-dash        # keep in sync with self_container in config.toml
+    restart: unless-stopped
+    network_mode: host                 # host CPU/network counters, and services on localhost (Gatus, NUT)
+    environment:
+      - TZ=${TZ:-UTC}                  # the clock on the screen
+      # - DEMO=1                       # made-up data, actions do nothing: try the Kindle side first
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /:/rootfs:ro                   # disk usage of the host's root filesystem
+      - ./config.toml:/config/config.toml:ro
+      - ./state:/state                 # remembers the screen orientation (Rotate button)
+      # More disks: mount them here and list them under [[storage]] in config.toml. For automounted
+      # network shares use rslave, so mounts that appear later show up inside the container:
+      # - /mnt/nas:/mnt/nas:ro,rslave

@@ -1,0 +1,102 @@
+# Kindle homelab dashboard settings. Copy to config.toml, change what you need, then
+#   docker compose up -d --build
+# Everything except token is optional. Restart the container after a change.
+
+# Shared secret; the Kindle sends it with every request. Generate one with: openssl rand -hex 16
+token = "change-me"
+
+# Name in the header. Default: the host's hostname.
+# name = "homelab"
+
+# port = 8100
+
+# The Kindle's framebuffer in portrait, in pixels. Paperwhite 3/4 and Voyage: [1072, 1448] (default).
+# Paperwhite 5/Signature, Oasis 2/3: [1236, 1648] / [1264, 1680]. Basic Kindle 10: [600, 800].
+# Pages are laid out for 1072 px wide and scaled to this.
+# screen = [1072, 1448]
+
+# Network interface for the traffic card. Default: the one with the default route.
+# net_interface = "eth0"
+
+# host:port that must accept a TCP connection for "internet OK" (and the latency shown).
+# internet_check = "1.1.1.1:443"
+
+# The container's own name (only needed by the reboot_host action, to find its image).
+# self_container = "kindle-dash"
+
+# An unplugged Kindle below this battery % is listed as a problem.
+# kindle_battery_warning = 20
+
+# ---- Status page
+
+# Storage card rows: label, a short note on what lives there, and the path inside the container
+# (mount extra disks in compose.yaml). Hung network mounts show as NOT RESPONDING instead of freezing.
+[[storage]]
+label = "Server SSD"
+detail = "system, Docker"
+path = "/rootfs"
+
+# [[storage]]
+# label = "NAS"
+# detail = "media, photos"
+# path = "/mnt/nas/media"
+
+# UPS card, from a NUT server (upsd). Leave out if you don't have one; the layout adapts.
+# [ups]
+# host = "127.0.0.1"
+# port = 3493
+# name = "ups"
+
+# Gatus (https://github.com/TwiN/gatus): shows "checks up/total" and lists failing ones as problems.
+# [gatus]
+# url = "http://127.0.0.1:8080"
+
+# Plain HTTP checks: shown in the summary line, listed as a problem when they don't answer (status < 400).
+# icon: a name from the list in the README, or a Font Awesome code point such as "f1eb".
+# [[checks]]
+# name = "router"
+# url = "http://192.168.1.1"
+# icon = "wifi"
+
+# ---- Actions page
+
+# Up to 4 containers with a big restart button (any container can also be restarted from the Containers page).
+shortcuts = []
+# shortcuts = ["plex", "homeassistant"]
+
+# Section title for the actions below.
+# actions_title = "Network & server"
+
+# Up to 4 buttons. Every one opens a confirm screen first. Each needs exactly one of:
+#   builtin = "restart_unhealthy" | "reboot_host"
+#   restart = "<container>"                                   restart one container
+#   exec = { container = "<name>", cmd = ["prog", "arg"] }    run a command in a container (cmd may be a
+#                                                             shell string); its last output line is shown
+#   http = { url = "...", method = "POST", body = "...", headers = { Authorization = "Bearer ..." } }
+# Optional texts: label, sub (small line on the button), icon, title / text / button (the confirm screen).
+[[actions]]
+builtin = "restart_unhealthy"
+
+[[actions]]
+builtin = "reboot_host"
+# reboot_host starts a privileged container that runs `systemctl reboot` on the host (systemd hosts only).
+
+# [[actions]]
+# label = "Reboot router"
+# sub = "Wi-Fi gone ~2 min"
+# icon = "wifi"
+# title = "Reboot the router?"
+# text = "Wi-Fi and internet are gone for about 2 minutes, this Kindle included."
+# button = "Reboot router"
+# http = { url = "http://192.168.1.50/relay/0?turn=off&timer=30", method = "GET" }   # e.g. a Shelly plug
+
+# ---- Touch
+
+# Raw touch coordinates -> screen pixels. The defaults fit the Paperwhite 4. If taps land in the wrong place,
+# tap the four corners, read the "tap x,y" lines in `docker logs kindle-dash`, and adjust.
+# [touch]
+# swap = false
+# flip_x = false
+# flip_y = false
+# max_x = 1071
+# max_y = 1447

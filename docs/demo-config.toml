@@ -1,0 +1,41 @@
+# Config used for the README screenshots (run with DEMO=1, so all data is made up).
+token = "demo"
+name = "homelab"
+shortcuts = ["plex", "homeassistant", "immich-server", "qbittorrent"]
+actions_title = "Network & server"
+[[storage]]
+label = "Server SSD"
+detail = "system, Docker, appdata"
+path = "/rootfs"
+[[storage]]
+label = "NAS"
+detail = "media"
+path = "/mnt/nas/media"
+[[storage]]
+label = "Backup disk"
+detail = "snapshots"
+path = "/mnt/backup"
+[ups]
+[gatus]
+url = "http://127.0.0.1:8080"
+[[checks]]
+name = "router"
+url = "http://192.168.1.1"
+icon = "wifi"
+[[actions]]
+builtin = "restart_unhealthy"
+[[actions]]
+label = "Reboot router"
+sub = "Wi-Fi gone ~2 min"
+icon = "wifi"
+title = "Reboot the router?"
+text = "Wi-Fi and internet are gone for about 2 minutes, this Kindle included."
+button = "Reboot router"
+http = { url = "http://192.168.1.1/reboot" }
+[[actions]]
+label = "Backup now"
+sub = "snapshot to NAS"
+icon = "database"
+exec = { container = "backup", cmd = "backup.sh" }
+[[actions]]
+builtin = "reboot_host"
