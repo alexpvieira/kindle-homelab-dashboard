@@ -4,6 +4,13 @@ Turn a jailbroken Kindle into a wall-mounted touch screen for your home server: 
 and the few buttons you want when something is off (restart a container, reboot the router, reboot the
 server). E-ink, so it is readable in a dark cabinet or a hallway and sips power.
 
+<p align="center">
+  <img src="docs/photos/frame-landscape.jpg" alt="The dashboard on a Kindle Paperwhite in the 3D-printed frame, landscape" height="320">
+  <img src="docs/photos/frame-portrait.jpg" alt="The same frame standing in portrait" height="320">
+</p>
+
+*A Kindle Paperwhite (10th gen) in the [3D-printed frame](https://makerworld.com/en/models/3609308-kindle-paperwhite-smart-home-dashboard-frame), landscape and portrait.*
+
 | Status | Actions | Confirm | Landscape |
 | --- | --- | --- | --- |
 | ![Status](docs/screenshots/port-status.png) | ![Actions](docs/screenshots/port-actions.png) | ![Confirm](docs/screenshots/port-confirm.png) | ![Landscape](docs/screenshots/land-status.png) |
