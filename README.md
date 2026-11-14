@@ -18,8 +18,9 @@ server). E-ink, so it is readable in a dark cabinet or a hallway and sips power.
   container, or an HTTP call). Every action asks for a confirming tap.
 - Portrait or landscape (either side up), switchable from the screen. Goes back to Status after 2 minutes.
 - The Kindle's own battery is in the header; an unplugged Kindle running low is listed as a problem.
-- A 3D-printable **wall frame** for it, hanging in portrait or landscape: on MakerWorld (link coming soon).
-  <!-- TODO: replace with the MakerWorld link once the frame is published -->
+- A 3D-printable **wall frame** for it, hanging in portrait or landscape:
+  [Kindle Paperwhite smart home dashboard frame](https://makerworld.com/en/models/3609308-kindle-paperwhite-smart-home-dashboard-frame)
+  on MakerWorld.
 
 ## How it works
 
